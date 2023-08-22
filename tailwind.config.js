@@ -13,7 +13,10 @@ module.exports = {
       },
       colors: {
         danger: "#FF004F",
-        success: "#C0FF00",
+        success: {
+          50: "#C0FF00",
+          100: "#03C03C"
+        },
         action: "#1F75FE"
       },
       keyframes: {

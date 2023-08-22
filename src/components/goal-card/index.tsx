@@ -1,24 +1,30 @@
-import { Goal } from "@actions/goals";
+import { Goal, checkIn } from "@actions/goals";
 import Button from "@components/common/button";
 import Card from "@components/common/card";
 import React, { useMemo } from "react";
 import { animClass } from "./styles";
+import { isToday } from "date-fns";
 
 const StreakBox = ({ day, pos }: { day: Goal["days"][number]; pos: number }) => {
-  const checkedClass = (() => {
-    if (day.checked) return "bg-success";
-    return "bg-danger";
-  })();
-
   return (
     <div
       className={`h-[15px] w-[15px] flex-shrink-0 ${animClass(day.checked ? "#c0ff00" : "#FF004F")}`}
-      style={{ animationDelay: `${pos * 100}ms` }}
+      style={day.noDelay ? {} : { animationDelay: `${pos * 100}ms` }}
     />
   );
 };
 
-const GoalCard = ({ goal }: { goal: Goal }) => {
+const GoalCard = ({ goal, row, updateData, col }: { goal: Goal; updateData: (v: any) => void; col: number; row: number }) => {
+  const onClick = async () => {
+    const res = await checkIn(goal._id);
+    if (res?.checked) {
+      updateData({ data: res, row, col });
+    } else {
+    }
+  };
+
+  const isTodayChecked = goal.days.length > 0 ? isToday(new Date(goal.days.at(-1)!.date)) : false;
+
   return (
     <Card>
       <div className="flex flex-col gap-4">
@@ -31,8 +37,12 @@ const GoalCard = ({ goal }: { goal: Goal }) => {
             <StreakBox day={day} key={idx} pos={idx} />
           ))}
         </div>
-        <div className="flex">
-          <Button text="Check In" />
+        <div className="flex justify-end">
+          <Button
+            text={isTodayChecked ? "Checked" : "Check In"}
+            onClick={isTodayChecked ? () => null : onClick}
+            variant={isTodayChecked ? "success" : "action"}
+          />
         </div>
       </div>
     </Card>
