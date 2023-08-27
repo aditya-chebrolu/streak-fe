@@ -1,9 +1,10 @@
-import { css } from "@emotion/css";
 import { Dialog } from "@mui/material";
-import React, { ChangeEvent, useState } from "react";
+import React, { useState } from "react";
 import { dialogStyles } from "./styles";
 import Button from "@components/common/button";
-import { Goal, createGoal } from "@actions/goals";
+import Card from "@components/common/card";
+import { createGoal } from "@services/add-goal";
+import { Goal } from "@type/goals";
 
 type InputProps = {
   label?: string;
@@ -39,7 +40,7 @@ const Content = ({ toggleForm, addToColumn }: Omit<Props, "open">) => {
     if (res) {
       res.days = [];
       addToColumn(res);
-      //   toggleForm();
+      toggleForm();
     }
   };
 
@@ -47,15 +48,17 @@ const Content = ({ toggleForm, addToColumn }: Omit<Props, "open">) => {
     setData((prev) => ({ ...prev, [key]: value }));
   };
   return (
-    <div className="text-white p-4 flex flex-col gap-4">
-      <div className="flex justify-end">
-        <Button variant="danger" text="close" size="sm" />
+    <Card>
+      <div className="text-white flex flex-col gap-4 p-2">
+        <div className="flex justify-end">
+          <Button variant="danger" text="close" size="sm" onClick={toggleForm} />
+        </div>
+        <Input type="text" label="Name of the goal" value={data.name} onChange={onInputChange("name")} />
+        <Input type="date" label="Start date" value={data.startDate} onChange={onInputChange("startDate")} />
+        <Input type="date" label="End date" value={data.endDate} onChange={onInputChange("endDate")} />
+        <Button text="Add" variant="action" onClick={onCreate} />
       </div>
-      <Input type="text" label="Name of the goal" value={data.name} onChange={onInputChange("name")} />
-      <Input type="date" label="Start date" value={data.startDate} onChange={onInputChange("startDate")} />
-      <Input type="date" label="End date" value={data.endDate} onChange={onInputChange("endDate")} />
-      <Button text="Add" variant="action" onClick={onCreate} />
-    </div>
+    </Card>
   );
 };
 
