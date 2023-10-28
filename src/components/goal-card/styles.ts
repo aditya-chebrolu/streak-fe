@@ -20,3 +20,7 @@ export const animClass = (color: string) => css`
   background-color: ${color};
   animation: ${scaleOutAnim(color)} 500ms forwards;
 `;
+
+export const x = css`
+  background-color: red;
+`;

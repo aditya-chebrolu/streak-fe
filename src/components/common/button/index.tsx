@@ -15,9 +15,9 @@ const Button = ({
 
   // const clickClass = mouseDown ? "translate-x-[3px] translate-y-[3px]" : "";
   const clickClass = mouseDown ? "scale-[0.95]" : "";
-
+  const x = () => {};
   const sizeClass = {
-    sm: "py-[1px] px-[5px] text-sm",
+    sm: "py-1 px-2 text-xs",
     md: "py-[2px] px-[10px]"
   }[size];
 

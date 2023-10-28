@@ -11,6 +11,9 @@ module.exports = {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
         "gradient-conic": "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))"
       },
+      boxShadow: {
+        card: "0 3.2px 7.2px 0 rgba(0,0,0,.132), 0 0.6px 1.8px 0 rgba(0,0,0,.108)"
+      },
       colors: {
         danger: "#FF004F",
         success: {
@@ -30,10 +33,10 @@ module.exports = {
       }
     },
     screens: {
-      tablet: "640px",
-      // => @media (min-width: 640px) { ... }
-      laptop: "1024px",
-      desktop: "1280px"
+      xs: "350px",
+      sm: "630px",
+      md: "950px",
+      lg: "1280px"
     }
   },
   plugins: []

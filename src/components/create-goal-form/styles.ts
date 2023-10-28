@@ -14,5 +14,6 @@ export const dialogStyles = css`
     border-radius: 0;
     animation: ${anim} 500ms forwards;
     translate: 0 20px;
+    background: linear-gradient(90deg, hsla(208, 100%, 97%, 1) 0%, hsla(204, 100%, 37%, 1) 100%);
   }
 `;
